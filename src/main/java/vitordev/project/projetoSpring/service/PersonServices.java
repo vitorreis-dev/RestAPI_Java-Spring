@@ -1,9 +1,9 @@
 package vitordev.project.projetoSpring.service;
 
 import org.springframework.stereotype.Service;
-import vitordev.project.projetoSpring.dto.PersonRequestDTO;
-import vitordev.project.projetoSpring.dto.PersonResponseDTO;
-import vitordev.project.projetoSpring.dto.PersonUpdateDTO;
+import vitordev.project.projetoSpring.dto.request.PersonRequestDTO;
+import vitordev.project.projetoSpring.dto.response.PersonResponseDTO;
+import vitordev.project.projetoSpring.dto.response.PersonUpdateDTO;
 import vitordev.project.projetoSpring.entity.Person;
 import vitordev.project.projetoSpring.exceptions.custom.BusinessException;
 import vitordev.project.projetoSpring.exceptions.custom.ResourceNotFoundException;

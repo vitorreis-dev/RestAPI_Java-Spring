@@ -1,10 +1,8 @@
-package vitordev.project.projetoSpring.dto;
-import jakarta.persistence.UniqueConstraint;
+package vitordev.project.projetoSpring.dto.request;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import org.hibernate.validator.constraints.UniqueElements;
 
 public record PersonRequestDTO(
         @NotBlank(message = "Name is required!")

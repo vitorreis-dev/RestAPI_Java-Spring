@@ -2,9 +2,9 @@ package vitordev.project.projetoSpring.controllers;
 
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import vitordev.project.projetoSpring.dto.PersonRequestDTO;
-import vitordev.project.projetoSpring.dto.PersonResponseDTO;
-import vitordev.project.projetoSpring.dto.PersonUpdateDTO;
+import vitordev.project.projetoSpring.dto.request.PersonRequestDTO;
+import vitordev.project.projetoSpring.dto.response.PersonResponseDTO;
+import vitordev.project.projetoSpring.dto.response.PersonUpdateDTO;
 import vitordev.project.projetoSpring.service.PersonServices;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

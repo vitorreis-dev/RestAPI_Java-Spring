@@ -1,4 +1,4 @@
-package vitordev.project.projetoSpring.dto;
+package vitordev.project.projetoSpring.dto.response;
 
 public record PersonUpdateDTO(
         String name,
