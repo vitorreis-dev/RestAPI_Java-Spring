@@ -3,7 +3,10 @@ package vitordev.project.projetoSpring.entity;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_book")
@@ -17,9 +20,10 @@ public class Book implements Serializable {
     @Column(nullable = false)
     private String author;
     @Column(nullable = false)
-    private String year;
-    @Column(nullable = false)
-    private String theme;
+    private LocalDate year;
+    @ManyToMany()
+    @JoinTable(name = "tb_book_theme", joinColumns = @JoinColumn(name="book_id"), inverseJoinColumns = @JoinColumn(name = "theme_id"))
+    private Set<BookThemes> bookThemes = new HashSet<>();
 
     public Book() {
     }
@@ -48,31 +52,31 @@ public class Book implements Serializable {
         this.author = author;
     }
 
-    public String getYear() {
+    public LocalDate getYear() {
         return year;
     }
 
-    public void setYear(String year) {
+    public void setYear(LocalDate year) {
         this.year = year;
     }
 
-    public String getTheme() {
-        return theme;
+    public Set<BookThemes> getBookThemes() {
+        return bookThemes;
     }
 
-    public void setTheme(String theme) {
-        this.theme = theme;
+    public void setBookThemes(Set<BookThemes> bookThemes) {
+        this.bookThemes = bookThemes;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return Objects.equals(id, book.id) && Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(year, book.year) && Objects.equals(theme, book.theme);
+        return Objects.equals(id, book.id) && Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(year, book.year) && Objects.equals(bookThemes, book.bookThemes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, author, year, theme);
+        return Objects.hash(id, title, author, year, bookThemes);
     }
 }

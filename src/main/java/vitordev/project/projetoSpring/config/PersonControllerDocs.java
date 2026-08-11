@@ -7,9 +7,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import vitordev.project.projetoSpring.dto.request.PersonRequestDTO;
-import vitordev.project.projetoSpring.dto.response.PersonResponseDTO;
-import vitordev.project.projetoSpring.dto.response.PersonUpdateDTO;
+import vitordev.project.projetoSpring.dto.person.PersonRequestDTO;
+import vitordev.project.projetoSpring.dto.person.PersonResponseDTO;
+import vitordev.project.projetoSpring.dto.person.PersonUpdateDTO;
 
 import java.util.List;
 
