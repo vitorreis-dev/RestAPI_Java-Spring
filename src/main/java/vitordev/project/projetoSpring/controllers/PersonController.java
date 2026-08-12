@@ -1,8 +1,6 @@
 package vitordev.project.projetoSpring.controllers;
 
-import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import vitordev.project.projetoSpring.dto.person.PersonRequestDTO;
 import vitordev.project.projetoSpring.dto.person.PersonResponseDTO;
 import vitordev.project.projetoSpring.dto.person.PersonUpdateDTO;
 import vitordev.project.projetoSpring.service.PersonServices;
@@ -31,15 +29,6 @@ public class PersonController implements vitordev.project.projetoSpring.config.P
     @Override
     public PersonResponseDTO findById(@PathVariable("id") Long id) {
         return service.findById(id);
-    }
-
-    @PostMapping(
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
-    )
-    @Override
-    public PersonResponseDTO create(@Valid @RequestBody PersonRequestDTO dto) {
-        return service.create(dto);
     }
 
     @PutMapping(value = "/{id}",

@@ -21,3 +21,8 @@ spring:
   sql:
     init:
       mode: never
+
+api:
+  security:
+    token:
+      secret: test-secret-key-for-jwt

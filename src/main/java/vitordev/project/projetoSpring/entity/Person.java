@@ -60,6 +60,8 @@ public class Person implements Serializable {
         this.password = password;
     }
 
+    public String getPassword() {return password;}
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -71,4 +73,5 @@ public class Person implements Serializable {
     public int hashCode() {
         return Objects.hash(id, name, cpf, email);
     }
+
 }

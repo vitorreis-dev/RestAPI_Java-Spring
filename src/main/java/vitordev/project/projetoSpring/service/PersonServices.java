@@ -1,34 +1,36 @@
 package vitordev.project.projetoSpring.service;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import vitordev.project.projetoSpring.dto.person.PersonRequestDTO;
 import vitordev.project.projetoSpring.dto.person.PersonResponseDTO;
 import vitordev.project.projetoSpring.dto.person.PersonUpdateDTO;
 import vitordev.project.projetoSpring.entity.Person;
-import vitordev.project.projetoSpring.exceptions.custom.BusinessException;
 import vitordev.project.projetoSpring.exceptions.custom.ResourceNotFoundException;
 import vitordev.project.projetoSpring.mapper.PersonMapper;
 import vitordev.project.projetoSpring.repository.PersonRepository;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.logging.Logger;
 
 @Service
-public class PersonServices {
+public class PersonServices implements UserDetailsService {
 
-    private final AtomicLong counter = new AtomicLong();
+    private final PersonMapper mapper;
 
-    private PersonMapper mapper;
-
-    private PersonRepository repository;
+    private final PersonRepository repository;
 
     public PersonServices(PersonRepository repository, PersonMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }
 
-    private final Logger logger = Logger.getLogger(PersonServices.class.getName());
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Person person = repository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
+
+        return org.springframework.security.core.userdetails.User.withUsername(person.getEmail()).password(person.getPassword()).roles("USER").build();
+    }
 
     public List<PersonResponseDTO> findAll() {
         return repository.findAll().stream().map(mapper::toDTO).toList();
@@ -41,36 +43,8 @@ public class PersonServices {
         return mapper.toDTO(person);
     }
 
-    public PersonResponseDTO create(PersonRequestDTO dto) {
-
-        logger.info("Creating one Person!");
-
-        Person entity = mapper.toEntity(dto);
-
-        boolean cpfExists = repository.existsByCpf(entity.getCpf());
-        boolean emailExists = repository.existsByEmail(entity.getEmail());
-
-        if (cpfExists && emailExists) {
-            throw new BusinessException("This CPF and E-mail already exists!");
-        }
-
-        if (emailExists) {
-            throw new BusinessException("This E-mail already exists!");
-        }
-
-        if (cpfExists) {
-            throw new BusinessException("This CPF already exists!");
-        }
-
-
-        Person saved = repository.save(entity);
-
-        return mapper.toDTO(saved);
-    }
-
     public PersonResponseDTO update(Long id, PersonUpdateDTO dto) {
 
-        logger.info("Updating one Person!");
         Person entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 
         mapper.updateEntity(dto,entity);

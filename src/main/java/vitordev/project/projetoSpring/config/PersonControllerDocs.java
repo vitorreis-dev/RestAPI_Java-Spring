@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import vitordev.project.projetoSpring.dto.person.PersonRequestDTO;
+import vitordev.project.projetoSpring.dto.person.RegisterRequestDTO;
 import vitordev.project.projetoSpring.dto.person.PersonResponseDTO;
 import vitordev.project.projetoSpring.dto.person.PersonUpdateDTO;
 
@@ -24,13 +24,6 @@ public interface PersonControllerDocs {
             @ApiResponse(responseCode = "404", description = "Pessoa não encontrada")
     })
     PersonResponseDTO findById(@PathVariable("id") Long id);
-
-    @Operation(summary = "Cria uma pessoa")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Pessoa criada"),
-            @ApiResponse(responseCode = "404", description = "Vishi")
-    })
-    PersonResponseDTO create(@Valid @RequestBody PersonRequestDTO dto);
 
     @Operation(summary = "Edita dados de uma pessoa")
     @ApiResponses({
