@@ -14,14 +14,13 @@ import vitordev.project.projetoSpring.entity.Book;
 public interface BookMapper {
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "bookThemes", ignore = true)
+    @Mapping(target = "theme", ignore = true)
     Book toEntity(BookRequestDTO dto);
 
-    @Mapping(source = "bookThemes", target = "themes")
     BookResponseDTO toDTO(Book entity);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "bookThemes", ignore = true)
+    @Mapping(target = "theme", ignore = true)
     void updateEntity(BookUpdateDTO dto, @MappingTarget Book entity);
 }

@@ -51,13 +51,13 @@ public class BookController {
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Long id) {
         service.delete(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body("Book deleted successfully.");
     }
 
     @DeleteMapping
     public ResponseEntity<?> deleteAll() {
         service.deleteAll();
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body("All books deleted successfully.");
     }
 
 }

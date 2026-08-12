@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "tb_book")
@@ -15,15 +13,15 @@ public class Book implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 150)
     private String title;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 150)
     private String author;
-    @Column(nullable = false)
+    @Column(name = "publication_year", nullable = false)
     private LocalDate year;
-    @ManyToMany()
-    @JoinTable(name = "tb_book_theme", joinColumns = @JoinColumn(name="book_id"), inverseJoinColumns = @JoinColumn(name = "theme_id"))
-    private Set<BookThemes> bookThemes = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "theme_id")
+    private BookThemes theme;
 
     public Book() {
     }
@@ -60,23 +58,23 @@ public class Book implements Serializable {
         this.year = year;
     }
 
-    public Set<BookThemes> getBookThemes() {
-        return bookThemes;
+    public BookThemes getTheme() {
+        return theme;
     }
 
-    public void setBookThemes(Set<BookThemes> bookThemes) {
-        this.bookThemes = bookThemes;
+    public void setTheme(BookThemes theme) {
+        this.theme = theme;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return Objects.equals(id, book.id) && Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(year, book.year) && Objects.equals(bookThemes, book.bookThemes);
+        return Objects.equals(id, book.id) && Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(year, book.year) && Objects.equals(theme, book.theme);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, author, year, bookThemes);
+        return Objects.hash(id, title, author, year, theme);
     }
 }

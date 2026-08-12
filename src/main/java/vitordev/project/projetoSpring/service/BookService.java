@@ -12,9 +12,7 @@ import vitordev.project.projetoSpring.mapper.BookMapper;
 import vitordev.project.projetoSpring.repository.BookRepository;
 import vitordev.project.projetoSpring.repository.BookThemesRepository;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Logger;
 
 @Service
@@ -33,6 +31,11 @@ public class BookService {
 
     @Transactional(readOnly = true)
     public List<BookResponseDTO> findAll() {
+
+        if(repository.findAll().isEmpty()){
+            throw new ResourceNotFoundException("No records found!");
+        }
+
         return repository.findAll().stream().map(mapper::toDTO).toList();
     }
 
@@ -49,7 +52,7 @@ public class BookService {
         logger.info("Creating one Book!");
 
         Book entity = mapper.toEntity(dto);
-        applyThemes(entity, dto.themeIDs());
+        applyTheme(entity, dto.themeID());
 
         Book saved = repository.save(entity);
 
@@ -62,26 +65,33 @@ public class BookService {
         Book entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 
         mapper.updateEntity(dto, entity);
-        applyThemes(entity, dto.themeIDs());
+        applyTheme(entity, dto.themeID());
 
         Book updatedBook = repository.save(entity);
 
         return mapper.toDTO(updatedBook);
     }
 
-    private void applyThemes(Book entity, Set<Long> themeIDs) {
-        if (themeIDs == null) {
-            return;
+    private void applyTheme(Book entity, Long themeID) {
+        if (themeID == null) {
+            throw new ResourceNotFoundException("Theme ID is required!");
         }
-        Set<BookThemes> themes = new HashSet<>(themesRepository.findAllById(themeIDs));
-        entity.setBookThemes(themes);
+        BookThemes theme = themesRepository.findById(themeID).orElseThrow(() -> new ResourceNotFoundException("No theme found for this ID!"));
+        entity.setTheme(theme);
     }
 
     public void deleteAll(){
-        repository.deleteAll();
+        if(repository.findAll().isEmpty()){
+            throw new ResourceNotFoundException("No records found to delete!");
+        }
     }
 
     public void delete(Long id) {
+
+        if(!repository.existsById(id)){
+            throw new ResourceNotFoundException("No records found for this ID!");
+        }
+
         repository.deleteById(id);
     }
 }

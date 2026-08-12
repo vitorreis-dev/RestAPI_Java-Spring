@@ -10,3 +10,8 @@ VALUES
     ('Horror'),
     ('Mystery'),
     ('Science Fiction');
+
+ALTER TABLE tb_book
+    ADD CONSTRAINT fk_book_theme
+        FOREIGN KEY (theme_id)
+            REFERENCES tb_theme (id);

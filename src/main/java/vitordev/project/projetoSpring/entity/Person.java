@@ -13,13 +13,13 @@ public class Person implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 150)
     private String name;
-    @Column(nullable = false, length = 11, unique = true)
+    @Column(nullable = false, length = 11)
     private String cpf;
-    @Column(nullable = false, length = 50, unique = true)
+    @Column(nullable = false, length = 255)
     private String email;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 255)
     private String password;
 
     public Person() {}
