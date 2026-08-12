@@ -21,4 +21,12 @@ public class TokenService {
 
         return JWT.create().withIssuer("api").withSubject(person.getEmail()).withExpiresAt(Instant.now().plus(2, ChronoUnit.HOURS)).sign(algorithm);
     }
+
+    public String validateToken(String token) {
+
+        Algorithm algorithm = Algorithm.HMAC256(secret);
+
+        return JWT.require(algorithm).withIssuer("api").build().verify(token).getSubject();
+    }
+
 }
