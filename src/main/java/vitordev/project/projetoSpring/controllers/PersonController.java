@@ -45,13 +45,13 @@ public class PersonController implements vitordev.project.projetoSpring.config.P
     @Override
     public ResponseEntity<?> delete(@PathVariable("id") Long id) {
         service.delete(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body("Register successfully deleted.");
     }
 
     @DeleteMapping
     @Override
     public ResponseEntity<?> deleteAll() {
         service.deleteAll();
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body("All records were successfully deleted.");
     }
 }

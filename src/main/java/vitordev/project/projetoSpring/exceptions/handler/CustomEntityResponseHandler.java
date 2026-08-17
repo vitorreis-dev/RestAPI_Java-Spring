@@ -16,6 +16,7 @@ import vitordev.project.projetoSpring.exceptions.custom.ConflictException;
 import vitordev.project.projetoSpring.exceptions.custom.InvalidCredentialsException;
 import vitordev.project.projetoSpring.exceptions.custom.ResourceNotFoundException;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,6 +29,7 @@ public class CustomEntityResponseHandler extends ResponseEntityExceptionHandler 
             WebRequest request) {
 
         ExceptionResponse response = new ExceptionResponse(
+                LocalDateTime.now(),
                 HttpStatus.INTERNAL_SERVER_ERROR,
                 ex.getMessage(),
                 request.getDescription(false));
@@ -43,6 +45,7 @@ public class CustomEntityResponseHandler extends ResponseEntityExceptionHandler 
             WebRequest request) {
 
         ExceptionResponse response = new ExceptionResponse(
+                LocalDateTime.now(),
                 HttpStatus.NOT_FOUND,
                 ex.getMessage(),
                 request.getDescription(false));
@@ -58,6 +61,7 @@ public class CustomEntityResponseHandler extends ResponseEntityExceptionHandler 
             WebRequest request) {
 
         ExceptionResponse response = new ExceptionResponse(
+                LocalDateTime.now(),
                 HttpStatus.BAD_REQUEST,
                 ex.getMessage(),
                 request.getDescription(false));
@@ -73,6 +77,7 @@ public class CustomEntityResponseHandler extends ResponseEntityExceptionHandler 
             WebRequest request) {
 
         ExceptionResponse response = new ExceptionResponse(
+                LocalDateTime.now(),
                 HttpStatus.CONFLICT,
                 ex.getMessage(),
                 request.getDescription(false));
@@ -88,6 +93,7 @@ public class CustomEntityResponseHandler extends ResponseEntityExceptionHandler 
             WebRequest request) {
 
         ExceptionResponse response = new ExceptionResponse(
+                LocalDateTime.now(),
                 HttpStatus.UNAUTHORIZED,
                 ex.getMessage(),
                 request.getDescription(false));

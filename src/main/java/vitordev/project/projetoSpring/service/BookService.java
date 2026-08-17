@@ -32,7 +32,9 @@ public class BookService {
     @Transactional(readOnly = true)
     public List<BookResponseDTO> findAll() {
 
-        if(repository.findAll().isEmpty()){
+        List<Book> books = repository.findAll();
+
+        if(books.isEmpty()){
             throw new ResourceNotFoundException("No records found!");
         }
 

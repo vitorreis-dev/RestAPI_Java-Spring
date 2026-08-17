@@ -29,7 +29,7 @@ public interface PersonControllerDocs {
     })
     PersonResponseDTO findById(@PathVariable("id") Long id);
 
-    @Operation(summary = "Editar todos os dados de uma pessoa")
+    @Operation(summary = "Edita os dados de uma pessoa")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Person data updated successfully"),
             @ApiResponse(responseCode = "404", description = "No records found for this ID!")
@@ -38,14 +38,14 @@ public interface PersonControllerDocs {
 
     @Operation(summary = "Excluir pessoa por ID")
     @ApiResponses({
-            @ApiResponse(responseCode = "204", description = "Person deleted successfully"),
+            @ApiResponse(responseCode = "200", description = "Person deleted successfully"),
             @ApiResponse(responseCode = "404", description = "No records found for this ID!")
     })
     ResponseEntity<?> delete(@PathVariable("id") Long id);
 
     @Operation(summary = "Excluir todas as pessoas cadastradas")
     @ApiResponses({
-            @ApiResponse(responseCode = "204", description = "All people deleted successfully"),
+            @ApiResponse(responseCode = "200", description = "All people deleted successfully"),
             @ApiResponse(responseCode = "404", description = "No records found to delete!")
     })
     ResponseEntity<?> deleteAll();

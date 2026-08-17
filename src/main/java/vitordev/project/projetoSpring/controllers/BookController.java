@@ -58,14 +58,14 @@ public class BookController implements BookControllerDocs {
     @Override
     public ResponseEntity<?> delete(@PathVariable("id") Long id) {
         service.delete(id);
-        return ResponseEntity.ok().body("Book deleted successfully.");
+        return ResponseEntity.ok().body("Book successfully deleted.");
     }
 
     @DeleteMapping
     @Override
     public ResponseEntity<?> deleteAll() {
         service.deleteAll();
-        return ResponseEntity.ok().body("All books deleted successfully.");
+        return ResponseEntity.ok().body("All books were successfully deleted.");
     }
 
 }

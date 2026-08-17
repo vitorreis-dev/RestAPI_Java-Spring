@@ -49,14 +49,14 @@ public interface BookControllerDocs {
 
     @Operation(summary = "Excluir livro por ID")
     @ApiResponses({
-            @ApiResponse(responseCode = "204", description = "Book deleted successfully"),
+            @ApiResponse(responseCode = "200", description = "Book deleted successfully"),
             @ApiResponse(responseCode = "404", description = "No records found for this ID!")
     })
     ResponseEntity<?> delete(@PathVariable("id") Long id);
 
     @Operation(summary = "Excluir todos os livros")
     @ApiResponses({
-            @ApiResponse(responseCode = "204", description = "All books deleted successfully"),
+            @ApiResponse(responseCode = "200", description = "All books deleted successfully"),
             @ApiResponse(responseCode = "404", description = "No records found to delete!")
     })
     ResponseEntity<?> deleteAll();
