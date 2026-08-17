@@ -15,7 +15,7 @@ import vitordev.project.projetoSpring.service.AuthService;
 
 @RestController
 @RequestMapping("/auth")
-public class AuthController {
+public class AuthController implements vitordev.project.projetoSpring.config.AuthControllerDocs {
     private AuthService authService;
 
     public AuthController(AuthService authService) {
@@ -23,6 +23,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
+    @Override
     public ResponseEntity<PersonResponseDTO> register(
             @Valid @RequestBody RegisterRequestDTO dto) {
 
@@ -32,6 +33,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
+    @Override
     public ResponseEntity<TokenResponseDTO> login(
             @Valid @RequestBody LoginRequestDTO dto) {
 

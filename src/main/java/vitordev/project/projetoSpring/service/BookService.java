@@ -84,6 +84,7 @@ public class BookService {
         if(repository.findAll().isEmpty()){
             throw new ResourceNotFoundException("No records found to delete!");
         }
+        repository.deleteAll();
     }
 
     public void delete(Long id) {

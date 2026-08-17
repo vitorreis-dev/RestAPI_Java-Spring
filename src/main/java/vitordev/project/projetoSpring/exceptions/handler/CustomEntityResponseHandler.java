@@ -4,7 +4,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,6 +12,8 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import vitordev.project.projetoSpring.exceptions.ExceptionResponse;
 import vitordev.project.projetoSpring.exceptions.custom.BusinessException;
+import vitordev.project.projetoSpring.exceptions.custom.ConflictException;
+import vitordev.project.projetoSpring.exceptions.custom.InvalidCredentialsException;
 import vitordev.project.projetoSpring.exceptions.custom.ResourceNotFoundException;
 
 import java.util.HashMap;
@@ -66,6 +67,35 @@ public class CustomEntityResponseHandler extends ResponseEntityExceptionHandler 
                 .body(response);
     }
 
+    @ExceptionHandler(ConflictException.class)
+    public ResponseEntity<ExceptionResponse> handleConflictDate(
+            ConflictException ex,
+            WebRequest request) {
+
+        ExceptionResponse response = new ExceptionResponse(
+                HttpStatus.CONFLICT,
+                ex.getMessage(),
+                request.getDescription(false));
+
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(response);
+    }
+
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<ExceptionResponse> handleInvalidCredentials(
+            InvalidCredentialsException ex,
+            WebRequest request) {
+
+        ExceptionResponse response = new ExceptionResponse(
+                HttpStatus.UNAUTHORIZED,
+                ex.getMessage(),
+                request.getDescription(false));
+
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(response);
+    }
     @Override
     public ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex,

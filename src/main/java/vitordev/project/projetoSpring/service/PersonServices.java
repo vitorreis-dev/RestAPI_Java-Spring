@@ -55,11 +55,19 @@ public class PersonServices implements UserDetailsService {
     }
 
     public void deleteAll(){
+        if(repository.findAll().isEmpty()){
+            throw new ResourceNotFoundException("No records found to delete!");
+        }
+
         repository.deleteAll();
     }
 
     public void delete(Long id) {
-        repository.deleteById(id);
+        if(!repository.existsById(id)){
+            throw new ResourceNotFoundException("No records found for this ID!");
+        }
+
+        repository.deleteById(id);;
     }
 }
 

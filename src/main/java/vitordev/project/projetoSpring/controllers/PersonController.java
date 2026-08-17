@@ -1,5 +1,6 @@
 package vitordev.project.projetoSpring.controllers;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.ResponseEntity;
 import vitordev.project.projetoSpring.dto.person.PersonResponseDTO;
 import vitordev.project.projetoSpring.dto.person.PersonUpdateDTO;
