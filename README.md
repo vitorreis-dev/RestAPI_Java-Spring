@@ -1,95 +1,91 @@
-# 📚 Book API
+# 📚 Book REST API - Spring Boot
 
-> RESTful API for managing books, users and authentication, developed with
-> Java and Spring Boot.
+> RestAPI para gerenciamento de livros, usuários e autenticação, desenvolvida com Java e Spring Boot.
 
-This project was developed as a practical study of backend development,
-focusing on REST APIs, Spring Security, JWT authentication, data validation,
-DTOs, database migrations and containerization.
+Este projeto foi desenvolvido como um estudo prático de desenvolvimento backend, com foco na construção de APIs REST, Spring Security, autenticação com JWT, validação de dados, DTOs, migrações de banco de dados e containerização.
 
 ---
 
-## 🚀 Features
+## 🚀 Funcionalidades
 
-- User registration and authentication
-- JWT-based authentication
-- Protected API endpoints with Spring Security
-- Book CRUD operations
-- Book and Theme relationship
-- Request and Response DTOs
-- DTO mapping with MapStruct
-- Bean Validation
-- Global exception handling
-- Database versioning with Flyway
-- OpenAPI / Swagger documentation
-
----
-
-## 🛠️ Technologies
-
-| Technology | Purpose |
-|---|---|
-| **Java** | Main programming language |
-| **Spring Boot** | Backend framework |
-| **Spring Security** | Authentication and authorization |
-| **JWT** | Token-based authentication |
-| **Spring Data JPA / Hibernate** | Data persistence |
-| **PostgreSQL** | Relational database |
-| **Flyway** | Database migrations |
-| **MapStruct** | DTO mapping |
-| **Bean Validation** | Data validation |
-| **OpenAPI / Swagger** | API documentation |
-| **Maven** | Dependency and build management |
-| **Docker** | Application containerization |
-| **Docker Compose** | Container orchestration |
+* Cadastro e autenticação de usuários
+* Autenticação baseada em JWT
+* Proteção de endpoints com Spring Security
+* Operações CRUD de livros
+* Relacionamento entre livros e temas
+* DTOs de requisição e resposta
+* Mapeamento de DTOs com MapStruct
+* Validação de dados com Bean Validation
+* Tratamento global de exceções
+* Versionamento do banco de dados com Flyway
+* Documentação da API com OpenAPI / Swagger
 
 ---
 
-## 📋 Prerequisites
+## 🛠️ Tecnologias
 
-Before running the project, make sure you have installed:
-
-- Java
-- Maven
-- Docker
-- Docker Compose
-- PostgreSQL *(only required if running the database outside Docker)*
+| Tecnologia                      | Finalidade                            |
+| ------------------------------- | ------------------------------------- |
+| **Java**                        | Linguagem principal                   |
+| **Spring Boot**                 | Framework backend                     |
+| **Spring Security**             | Autenticação e autorização            |
+| **JWT**                         | Autenticação baseada em tokens        |
+| **Spring Data JPA / Hibernate** | Persistência de dados                 |
+| **PostgreSQL**                  | Banco de dados relacional             |
+| **Flyway**                      | Migrações e versionamento do banco    |
+| **MapStruct**                   | Mapeamento entre DTOs e entidades     |
+| **Bean Validation**             | Validação de dados                    |
+| **OpenAPI / Swagger**           | Documentação da API                   |
+| **Maven**                       | Gerenciamento de dependências e build |
+| **Docker**                      | Containerização da aplicação          |
+| **Docker Compose**              | Orquestração dos containers           |
 
 ---
 
-## 🚀 Getting Started
+## 📋 Pré-requisitos
 
-### 🔐 Environment Variables
+Antes de executar o projeto, certifique-se de ter instalado:
 
-Create a `.env` file containing the required environment variables:
+* Java
+* Maven
+* Docker
+* Docker Compose
+* PostgreSQL *(necessário apenas caso o banco seja executado fora do Docker)*
+
+---
+
+## 🚀 Como executar
+
+### 🔐 Variáveis de ambiente
+
+Crie um arquivo `.env` contendo as variáveis de ambiente necessárias:
 
 ```env
 DB_URL=jdbc:postgresql://localhost:5432/database
 DB_USERNAME=your_username
 DB_PASSWORD=your_password
 JWT_SECRET=your_secret
-````
+```
 
-> ⚠️ The `.env` file contains sensitive information and must not be
-> committed to the repository.
+> ⚠️ O arquivo `.env` contém informações sensíveis e não deve ser enviado para o repositório.
 
 ---
 
-### 🐳 Running with Docker
+### 🐳 Executando com Docker
 
-Build and start the application:
+Para construir as imagens e iniciar a aplicação:
 
 ```bash
 docker compose up --build
 ```
 
-To run the application in the background:
+Para executar os containers em segundo plano:
 
 ```bash
 docker compose up -d --build
 ```
 
-To stop the containers:
+Para parar os containers:
 
 ```bash
 docker compose down
@@ -97,21 +93,21 @@ docker compose down
 
 ---
 
-### ☕ Running with Maven
+### ☕ Executando com Maven
 
-Build the application:
+Para compilar e empacotar a aplicação:
 
 ```bash
 mvn clean package
 ```
 
-Then run the generated JAR:
+Em seguida, execute o arquivo JAR gerado:
 
 ```bash
 java -jar target/*.jar
 ```
 
-The API will be available at:
+A API estará disponível em:
 
 ```text
 http://localhost:8080
@@ -119,9 +115,9 @@ http://localhost:8080
 
 ---
 
-## 📖 API Documentation
+## 📖 Documentação da API
 
-The API is documented using **OpenAPI / Swagger**.
+A API é documentada utilizando **OpenAPI / Swagger**.
 
 ### Swagger UI
 
@@ -129,47 +125,47 @@ The API is documented using **OpenAPI / Swagger**.
 http://localhost:8080/docs
 ```
 
-### OpenAPI Specification
+### Especificação OpenAPI
 
 ```text
 http://localhost:8080/api-docs
 ```
 
-The Swagger interface is publicly accessible.
+A interface do Swagger está disponível publicamente.
 
-Protected endpoints require a valid JWT token, which can be provided through
-Swagger's **Authorize** button.
+Os endpoints protegidos exigem um token JWT válido, que pode ser informado através do botão **Authorize** do Swagger.
 
 ---
 
-## 🔐 Authentication
+## 🔐 Autenticação
 
-Authentication is implemented using **Spring Security** and **JWT**.
+A autenticação é implementada utilizando **Spring Security** e **JWT**.
 
-The authentication flow is:
+O fluxo de autenticação funciona da seguinte maneira:
+
 ```text
-Register
+Cadastro
    ↓
 Login
    ↓
-JWT Token
+Token JWT
    ↓
 Authorization Header
    ↓
-Protected Endpoint
+Endpoint protegido
 ```
 
 ---
 
-## 👤 User Authentication
+## 👤 Autenticação de usuários
 
-### Register
+### Cadastro
 
 ```http
 POST /api/v1/auth/register
 ```
 
-**Example request:**
+**Exemplo de requisição:**
 
 ```json
 {
@@ -185,7 +181,7 @@ POST /api/v1/auth/register
 POST /api/v1/auth/login
 ```
 
-**Example request:**
+**Exemplo de requisição:**
 
 ```json
 {
@@ -194,24 +190,23 @@ POST /api/v1/auth/login
 }
 ```
 
-The login endpoint returns a JWT that can be used to access protected
-resources.
+O endpoint de login retorna um JWT que pode ser utilizado para acessar os recursos protegidos da API.
 
 ---
 
-## 📚 Books
+## 📚 Livros
 
-The API provides endpoints for managing books.
+A API fornece endpoints para gerenciamento de livros.
 
-| Method   | Endpoint             | Description             |
-| -------- | -------------------- | ----------------------- |
-| `GET`    | `/api/v1/books`      | Get all books           |
-| `GET`    | `/api/v1/books/{id}` | Get a book by ID        |
-| `POST`   | `/api/v1/books`      | Create a book           |
-| `PATCH`  | `/api/v1/books/{id}` | Partially update a book |
-| `DELETE` | `/api/v1/books/{id}` | Delete a book           |
+| Método   | Endpoint             | Descrição                      |
+| -------- | -------------------- | ------------------------------ |
+| `GET`    | `/api/v1/books`      | Lista todos os livros          |
+| `GET`    | `/api/v1/books/{id}` | Busca um livro pelo ID         |
+| `POST`   | `/api/v1/books`      | Cria um novo livro             |
+| `PATCH`  | `/api/v1/books/{id}` | Atualiza parcialmente um livro |
+| `DELETE` | `/api/v1/books/{id}` | Remove um livro                |
 
-### Example
+### Exemplo
 
 ```json
 {
@@ -222,13 +217,37 @@ The API provides endpoints for managing books.
 }
 ```
 
-A book is associated with a single theme through a `ManyToOne` relationship.
+Um livro está associado a um único tema através de um relacionamento `ManyToOne`.
 
 ---
 
-## 🏷️ Themes
+## 👤 Pessoas
 
-Themes are stored as independent entities in the database.
+A API disponibiliza endpoints para gerenciamento de pessoas.
+
+| Método   | Endpoint       | Descrição                           |
+| -------- | -------------- | ----------------------------------- |
+| `GET`    | `/person`      | Retorna todas as pessoas            |
+| `GET`    | `/person/{id}` | Retorna uma pessoa pelo ID          |
+| `PUT`    | `/person/{id}` | Atualiza os dados de uma pessoa     |
+| `DELETE` | `/person/{id}` | Exclui uma pessoa pelo ID           |
+| `DELETE` | `/person`      | Exclui todas as pessoas cadastradas |
+
+---
+
+## 👋 Greeting
+
+A API também disponibiliza um endpoint simples para teste da aplicação.
+
+| Método | Endpoint | Descrição                        |
+| ------ | -------- | -------------------------------- |
+| `GET`  | `/`      | Retorna uma mensagem de saudação |
+
+---
+
+## 🏷️ Temas
+
+Os temas são armazenados como entidades independentes no banco de dados.
 
 ```text
 Theme
@@ -236,13 +255,12 @@ Theme
 └── name
 ```
 
-A book references a theme through its `theme_id`.
+Um livro referencia um tema através da coluna `theme_id`.
 
-This approach allows themes to be managed independently instead of using
-hard-coded Java enums.
+Essa abordagem permite que os temas sejam gerenciados de forma independente, em vez de serem definidos como enums fixos na aplicação.
 
 ---
 
-## 👨‍💻 Author
+## 👨‍💻 Autor
 
 ### <a href="https://github.com/vitorreis-dev">Vitor Otavio dos Reis</a>
